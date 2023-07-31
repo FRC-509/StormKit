@@ -1,9 +1,9 @@
 package com.redstorm509.stormkit.command;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 
-public abstract class StatefulSubsystem<T extends Comparable<T>> extends SubsystemBase {
+public abstract class StatefulSubsystem<T extends Comparable<T>> extends Subsystem {
 	T currentState;
 
 	public StatefulSubsystem(T startingState) {

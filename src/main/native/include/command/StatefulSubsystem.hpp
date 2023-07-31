@@ -1,17 +1,17 @@
-#include <frc2/command/SubsystemBase.h>
+#include <frc2/command/Subsystem.h>
 #include <frc/DriverStation.h>
 
 namespace stormkit {
     namespace command {
-        template <class T, std::enable_if_t<std::equality_comparable<T>> = 0> class StatefulSubsystem : public SubsystemBase {
+        template <class T, std::enable_if_t<std::equality_comparable<T>> = 0> class StatefulSubsystem : public frc2::Subsystem {
         private:
             T m_current_state;
         public:
-            StatefulSubsystem(T starting_state) {
+            inline StatefulSubsystem(T starting_state) {
                 m_current_state = starting_state;
             }
 
-            void ManageState() {
+            inline void ManageState() {
                 if (DriverStation::IsAutonomous()) {
                     return;
                 }
@@ -27,17 +27,17 @@ namespace stormkit {
                 OnStateUpdate(m_current_state);
             }
 
-            virtual void periodic() {
+            inline virtual void periodic() {
                 ManageState();
             }
 
-            virtual T SetState() {}
+            inline virtual T SetState() {}
 
-            virtual void OnStateEnter(T state) {}
+            inline virtual void OnStateEnter(T state) {}
 
-            virtual void OnStateExit(T state) {}
+            inline virtual void OnStateExit(T state) {}
 
-            virtual void OnStateUpdate(T state) {}
+            inline virtual void OnStateUpdate(T state) {}
         };
     };
 };
