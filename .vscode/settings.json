@@ -8,6 +8,11 @@
   },
   "C_Cpp.default.configurationProvider": "vscode-wpilib",
   "files.associations": {
-    "concepts": "cpp"
+    "concepts": "cpp",
+    "algorithm": "cpp",
+    "type_traits": "cpp",
+    "xutility": "cpp",
+    "vector": "cpp",
+    "xtr1common": "cpp"
   }
 }

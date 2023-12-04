@@ -1,9 +1,9 @@
-#include <frc2/command/Subsystem.h>
+#include <frc2/command/SubsystemBase.h>
 #include <frc/DriverStation.h>
 
 namespace stormkit {
     namespace command {
-        template <class T, std::enable_if_t<std::equality_comparable<T>> = 0> class StatefulSubsystem : public frc2::Subsystem {
+        template <class T, std::enable_if_t<std::equality_comparable<T>> = 0> class StatefulSubsystem : public frc2::SubsystemBase {
         private:
             T m_current_state;
         public:
@@ -27,7 +27,7 @@ namespace stormkit {
                 OnStateUpdate(m_current_state);
             }
 
-            inline virtual void periodic() {
+            inline virtual void Periodic() {
                 ManageState();
             }
 

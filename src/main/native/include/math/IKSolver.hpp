@@ -12,7 +12,7 @@ namespace stormkit {
                 double pivot_max_extent_radians;
                 double pivot_radians;
                 double length_meters;
-                inline void apply_delta(const double delta) {
+                constexpr void apply_delta(const double delta) {
                     this->pivot_radians = std::clamp(this->pivot_radians + delta, this->pivot_min_extent_radians, this->pivot_max_extent_radians);
                 }
             };
@@ -21,23 +21,23 @@ namespace stormkit {
         public:
             /// @brief Constructs an IKSolver with the given segment information.
             /// @param segment_params 
-            inline IKSolver(const std::vector<SegmentParams>& segment_params) : segments(segment_params) {
+            constexpr IKSolver(const std::vector<SegmentParams>& segment_params) : segments(segment_params) {
             }
 
             /// @brief Constructs an IKSolver with the given segment information. Note: This function takes ownership of the vector passed in!
             /// @param segment_params
-            inline IKSolver(std::vector<SegmentParams>&& segment_params) : segments(std::move(segment_params)) {
+            constexpr IKSolver(std::vector<SegmentParams>&& segment_params) : segments(std::move(segment_params)) {
             }
 
             /// @brief Updates the segment information. Run this with sensor information before doing any calculations.
             /// @param segment_params An ArrayList of 2-component vectors, where each vector's x-component corresponds to a joint's pivot angle in radians, and its y-component corresponds to a joint's arm length in meters. 
-            inline void update_segments(const std::vector<SegmentParams>& segment_params) {
+            constexpr void update_segments(const std::vector<SegmentParams>& segment_params) {
                 this->segments = segment_params;
             }
 
             /// @brief Updates the segment information. Run this with sensor information before doing any calculations. Note: This function takes ownership of the vector passed in!
             /// @param segment_params An ArrayList of 2-component vectors, where each vector's x-component corresponds to a joint's pivot angle in radians, and its y-component corresponds to a joint's arm length in meters.  
-            inline void update_segments(std::vector<SegmentParams>&& segment_params) {
+            constexpr void update_segments(std::vector<SegmentParams>&& segment_params) {
                 this->segments = std::move(segment_params);
             }
 
