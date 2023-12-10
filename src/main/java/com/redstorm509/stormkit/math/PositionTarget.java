@@ -4,57 +4,57 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Timer;
 
 public class PositionTarget {
-	double target;
-	double min = -Double.MAX_VALUE;
-	double max = +Double.MAX_VALUE;
+	double target = 0.0;
+	double minTargetPos = -Double.MAX_VALUE;
+	double maxTargetPos = +Double.MAX_VALUE;
+	double maxRate = 1.0;
 
 	double previousTimeStamp = 0.0;
 
 	public PositionTarget() {
 		previousTimeStamp = Timer.getFPGATimestamp();
-		setTarget(0.0);
 	}
 
-	public PositionTarget(double start, double min, double max) {
+	public PositionTarget(double initialTarget, double minTargetPos, double maxTargetPos) {
 		previousTimeStamp = Timer.getFPGATimestamp();
-		this.min = min;
-		this.max = max;
-		setTarget(start);
+		this.minTargetPos = minTargetPos;
+		this.maxTargetPos = maxTargetPos;
+		setTarget(initialTarget);
 	}
 
-	public void setMin(double min) {
-		this.min = min;
+	public PositionTarget(double initialTarget, double minTargetPos, double maxTargetPos, double maxRate) {
+		previousTimeStamp = Timer.getFPGATimestamp();
+		this.minTargetPos = minTargetPos;
+		this.maxTargetPos = maxTargetPos;
+		this.maxRate = maxRate;
+		setTarget(initialTarget);
 	}
 
-	public void setMax(double max) {
-		this.max = max;
+	public void setMinTargetPosition(double min) {
+		this.minTargetPos = min;
+	}
+
+	public void setMaxTargetPosition(double max) {
+		this.maxTargetPos = max;
+	}
+
+	public void setMaxRate(double maxRate) {
+		this.maxRate = maxRate;
 	}
 
 	public double setTarget(double position) {
-		target = MathUtil.clamp(position, min, max);
+		target = MathUtil.clamp(position, minTargetPos, maxTargetPos);
 		return target;
 	}
 
-	public double update(double percent, double rate) {
-		percent = MathUtil.clamp(percent, -1.0d, 1.0d);
+	public double update(double percentOfMaximumRate) {
+		percentOfMaximumRate = MathUtil.clamp(percentOfMaximumRate, -1.0d, 1.0d);
 
 		double deltaTime = Timer.getFPGATimestamp() - previousTimeStamp;
-		target += rate * percent * deltaTime;
+		target += maxRate * percentOfMaximumRate * deltaTime;
 		previousTimeStamp = Timer.getFPGATimestamp();
 
-		target = MathUtil.clamp(target, min, max);
-
-		return target;
-	}
-
-	public double update(double percent) {
-		percent = MathUtil.clamp(percent, -1.0d, 1.0d);
-
-		double deltaTime = Timer.getFPGATimestamp() - previousTimeStamp;
-		target += percent * deltaTime;
-		previousTimeStamp = Timer.getFPGATimestamp();
-
-		target = MathUtil.clamp(target, min, max);
+		target = MathUtil.clamp(target, minTargetPos, maxTargetPos);
 
 		return target;
 	}

@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-public class LogitechController extends GenericHID {
+public class LogitechDualAction extends GenericHID {
 	public enum LogiButton {
 		A(2),
 		B(3),
@@ -47,7 +47,7 @@ public class LogitechController extends GenericHID {
 		}
 	}
 
-	public LogitechController(int port) {
+	public LogitechDualAction(int port) {
 		super(port);
 	}
 

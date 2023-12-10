@@ -15,7 +15,7 @@ public abstract class StatefulSubsystem<T extends Comparable<T>> extends Subsyst
 			return;
 		}
 
-		T newState = setState();
+		T newState = getState();
 
 		if (newState != currentState) {
 			onStateExit(currentState);
@@ -29,10 +29,9 @@ public abstract class StatefulSubsystem<T extends Comparable<T>> extends Subsyst
 	@Override
 	public void periodic() {
 		manageState();
-		super.periodic();
 	}
 
-	abstract public T setState();
+	abstract public T getState();
 
 	abstract public void onStateEnter(T state);
 

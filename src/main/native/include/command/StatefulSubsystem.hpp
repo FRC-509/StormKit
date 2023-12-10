@@ -1,3 +1,4 @@
+#pragma once
 #include <frc2/command/SubsystemBase.h>
 #include <frc/DriverStation.h>
 
@@ -16,7 +17,7 @@ namespace stormkit {
                     return;
                 }
 
-                T new_state = SetState();
+                T new_state = GetState();
 
                 if (new_state != m_current_state) {
                     OnStateExit(m_current_state);
@@ -31,7 +32,7 @@ namespace stormkit {
                 ManageState();
             }
 
-            inline virtual T SetState() {}
+            inline virtual T GetState() {}
 
             inline virtual void OnStateEnter(T state) {}
 

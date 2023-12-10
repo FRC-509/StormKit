@@ -24,6 +24,5 @@ public class DeviceBuilder {
 		public DoubleSolenoid build() {
 			return new DoubleSolenoid(id, type, forwardChannel, reverseChannel);
 		}
-
 	}
 }

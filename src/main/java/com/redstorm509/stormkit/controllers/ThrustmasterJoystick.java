@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-public class JoystickController extends Joystick {
+public class ThrustmasterJoystick extends Joystick {
 	public enum StickButton {
 		Trigger(1),
 		Bottom(2),
@@ -34,7 +34,7 @@ public class JoystickController extends Joystick {
 		}
 	}
 
-	public JoystickController(int port) {
+	public ThrustmasterJoystick(int port) {
 		super(port);
 	}
 
