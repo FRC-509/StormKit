@@ -5,12 +5,18 @@
 
 namespace stormkit {
     namespace math {
+        /// A simple 2-dimensional inverse kinematics solver.
+        /// Reference code: https://github.com/FRC-509/inverse-kinematics/blob/master/src/kinematics.rs
         template <std::size_t MAX_ITERATIONS = 100> class IKSolver {
         public:
             struct SegmentParams {
+                /// The minimum pivot angle permitted for the segment in radians.
                 double pivot_min_extent_radians;
+                /// The maximum pivot angle permitted for the segment in radians.
                 double pivot_max_extent_radians;
+                /// The initial angle of the segment in radians.
                 double pivot_radians;
+                /// The length of the segment in meters.
                 double length_meters;
                 constexpr void apply_delta(const double delta) {
                     this->pivot_radians = std::clamp(this->pivot_radians + delta, this->pivot_min_extent_radians, this->pivot_max_extent_radians);

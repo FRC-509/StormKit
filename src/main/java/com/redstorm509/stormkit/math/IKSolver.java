@@ -20,10 +20,10 @@ public class IKSolver {
         public double lengthMeters;
         
         /**
-         * @param pivotMinExtentRadians
-         * @param pivotMaxExtentRadians
-         * @param pivotRadians
-         * @param lengthMeters
+         * @param pivotMinExtentRadians The minimum pivot angle permitted for the segment in radians.
+         * @param pivotMaxExtentRadians The maximum pivot angle permitted for the segment in radians.
+         * @param pivotRadians The initial angle of the segment in radians.
+         * @param lengthMeters The length of the segment in meters.
          */
         public SegmentParams(double pivotMinExtentRadians, double pivotMaxExtentRadians, double pivotRadians, double lengthMeters) {
             this.pivotMinExtentRadians = pivotMinExtentRadians;
@@ -32,7 +32,7 @@ public class IKSolver {
             this.lengthMeters = lengthMeters;
         }
 
-        void applyDelta(double deltaPivotRadians) {
+        public void applyDelta(double deltaPivotRadians) {
             this.pivotRadians = MathUtil.clamp(this.pivotRadians + deltaPivotRadians, this.pivotMinExtentRadians, this.pivotMaxExtentRadians);
         }
     } 

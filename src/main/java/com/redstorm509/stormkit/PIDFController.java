@@ -3,32 +3,77 @@ package com.redstorm509.stormkit;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.util.sendable.SendableBuilder;
 
+/** Implements a PIDF control loop. */
 public class PIDFController extends PIDController {
-	private double kF;
+	private double kF = 0.0d;
 
+	/**
+	 * Allocates a PIDFController with the given constants for kp, ki, kd, and kf and a default period of
+	 * 0.02 seconds.
+	 *
+	 * @param kp The proportional coefficient.
+	 * @param ki The integral coefficient.
+	 * @param kd The derivative coefficient.
+	 * @param kf The feedforward coefficient.
+	 */
+	public PIDFController(double kp, double ki, double kd, double kf) {
+		super(kp, ki, kd);
+		setF(kf);
+	}
+
+	/**
+	 * Allocates a PIDFController with the given constants for kp, ki, kd, and kf.
+	 *
+	 * @param kp The proportional coefficient.
+	 * @param ki The integral coefficient.
+	 * @param kd The derivative coefficient.
+	 * @param kf The feedforward coefficient.
+	 * @param period The period between controller updates in seconds. Must be non-zero and positive.
+	 */
+	public PIDFController(double kp, double ki, double kd, double kf, double period) {
+		super(kp, ki, kd, period);
+		setF(kf);
+	}
+
+	/**
+	 * Get the Feedforward coefficient.
+	 *
+	 * @return feedforward coefficient
+	 */
 	public double getF() {
 		return kF;
 	}
 
-	public void setF(double kF) {
-		this.kF = kF;
+	/**
+	 * Sets the Feedforward coefficient of the PIDF controller gain.
+	 *
+	 * @param kf feedforward coefficient
+	 */
+	public void setF(double kf) {
+		this.kF = kf;
 	}
 
-	public void setPIDF(double kP, double kI, double kD, double kF) {
-		setPID(kP, kI, kD);
-		setF(kF);
+	/**
+	 * Sets the PIDF Controller gain parameters.
+	 *
+	 * <p>Set the proportional, integral, differential, and feedforward coefficients.
+	 *
+	 * @param kp The proportional coefficient.
+	 * @param ki The integral coefficient.
+	 * @param kd The derivative coefficient.
+	 * @param kf The feedforward coefficient.
+	 */
+	public void setPIDF(double kp, double ki, double kd, double kf) {
+		setPID(kp, ki, kd);
+		setF(kf);
 	}
 
-	public PIDFController() {
-		super(0.0d, 0.0d, 0.0d);
-		setF(0.0d);
-	}
-
-	public PIDFController(double kP, double kI, double kD, double kF) {
-		super(kP, kI, kD);
-		setF(kF);
-	}
-
+	/**
+	 * Returns the next output of the PID controller.
+	 *
+	 * @param measurement The current measurement of the process variable.
+	 * @return The next controller output.
+	 */
 	@Override
 	public double calculate(double measurement) {
 		return super.calculate(measurement) + measurement * kF;
