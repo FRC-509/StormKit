@@ -1,13 +1,13 @@
 package com.redstorm509.stormkit.command;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
  * An alternative way of organizing subsystem-specific code.
  * This generic class takes in an enum that represents the state of the subsytem, and provides interfaces for triggering code when states are entered and exited.
  */
-public abstract class StatefulSubsystem<T extends Comparable<T>> extends Subsystem {
+public abstract class StatefulSubsystem<T extends Comparable<T>> extends SubsystemBase {
 	protected T currentState;
 	
     /**
